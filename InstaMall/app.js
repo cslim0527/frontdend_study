@@ -1,3 +1,7 @@
+import Timeline from './src/Timeline.js'
+
 const tag = '[App.js]'
 
-console.log(tag)
+
+const TimelineComponent = Timeline('#jsTimelnie','https://my-json-server.typicode.com/it-crafts/mockapi/timeline/')
+
