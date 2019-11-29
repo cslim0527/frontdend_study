@@ -10,6 +10,7 @@ const Feed = function(selector, url) {
 
     const create = async () => {
         console.log('[Feed] create()')
+        loading.style.display = ''
         initScroll()
         renderMoreFeed(await getFeedData(_page))
         loading.style.display = 'none'
@@ -51,7 +52,6 @@ const Feed = function(selector, url) {
     }
 
     const onScroll = async () => {
-        console.log('scroll')
         const docHeight = document.documentElement.scrollHeight
         const winHeight = document.documentElement.clientHeight
         const scrollTop = window.pageYOffset

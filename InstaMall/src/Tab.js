@@ -1,7 +1,7 @@
 const Tab = function(selector) {
     const _tab = document.querySelector(selector)
+    const loading = document.querySelector('._4emnV')
     const onClickEvent = function(e){onClickTab(e)}
-
     let tabBtns = _tab.querySelectorAll('._9VEo1 ')
 
     const create = () => {
@@ -21,6 +21,10 @@ const Tab = function(selector) {
     }
 
     const onClickTab = (e) => {
+        if(e.currentTarget.classList.contains('T-jvg')) {
+            return;
+        }
+
         tabBtns = Array.isArray(tabBtns) ? tabBtns : Array.from(tabBtns)
         const ACTIVE_TAB = e.currentTarget.children[0].getAttribute('aria-label')
 
@@ -29,10 +33,8 @@ const Tab = function(selector) {
     }
 
     const setActiveTab = (e) => {
-        if(e.currentTarget.classList.contains('T-jvg')) {
-            return;
-        }
-        
+
+
         tabBtns.forEach((tab) => {
 
             tab.classList.remove('T-jvg')

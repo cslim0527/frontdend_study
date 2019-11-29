@@ -11,6 +11,7 @@ const Timeline = function(selector, url) {
 
     const create = async () => {
         console.log('[Timeline] create()')
+        loading.style.display = ''
         initScroll()
         renderMoreTimeline(await getTimelineData(_page))
         loading.style.display = 'none'
