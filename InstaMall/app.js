@@ -5,11 +5,12 @@ import Cart from './src/Cart.js'
 
 const root = (() => {
     const _selector = '#app';
-    let _page;
     let CURRENT_TAB = '게시물'
+    let _page;
 
     const create = () => {
         const TabComponent = new Tab('.fx7hk')
+        TabComponent.setActiveTab(CURRENT_TAB)
         document.querySelector('.fx7hk').addEventListener('@change', e => onChangePage(e.detail))
         _page = new Timeline('#app','https://my-json-server.typicode.com/it-crafts/mockapi/timeline/')
     }
