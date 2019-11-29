@@ -1,3 +1,5 @@
+// TODO 최초 진입시에 버튼ON 처리가 안 되어 있습니다
+
 const Tab = function(selector) {
     const _tab = document.querySelector(selector)
     const loading = document.querySelector('._4emnV')
@@ -20,6 +22,8 @@ const Tab = function(selector) {
         })
     }
 
+    // TODO 각 컴포넌트 created 전에 버튼클릭 방지 해주세요
+    // 저는 그냥 임시로 로딩이미지ON 여부만 보고 예외처리 했습니다
     const onClickTab = (e) => {
         if(e.currentTarget.classList.contains('T-jvg')) {
             return;
