@@ -3,7 +3,8 @@ import Timeline from './src/Timeline.js'
 import Feed from './src/Feed.js'
 import Cart from './src/Cart.js'
 
-const root = (() => {
+const page = (() => {
+    const mainEl = document.querySelector('main')
     const _selector = '#app';
     let CURRENT_TAB = '게시물'
     let _page;
@@ -31,4 +32,10 @@ const root = (() => {
     }
 
     create()
+
+    return {
+        onChangePage
+    }
 })()
+
+console.log(page)
