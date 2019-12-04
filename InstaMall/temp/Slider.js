@@ -15,6 +15,7 @@ const Slider = function(param = {}) {
   const create = async () => {
     console.log('[Slider] create()')
     renderSlideImg(data.imgList)
+    // TODO 아래 호출라인 제거 (불필요) 및 메소드명 변경
     initSlideSize()
     initPager()
     addEvents()
@@ -95,6 +96,7 @@ const Slider = function(param = {}) {
         width = container.offsetWidth
         console.log('resize: ', width)
         initSlideSize(width)
+        // TODO 아래라인 initSlideSize 메소드 내부로 이동
         container.style.transform = `translateX(${width * (-index+1)}px)`
         flag = false
       }, 150)
