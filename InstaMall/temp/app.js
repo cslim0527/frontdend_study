@@ -5,6 +5,7 @@ import Detail from './Detail.js'
     imgPath: 'https://raw.githubusercontent.com/it-crafts/mockapi/master/',
     selector: '#detail',
     url: 'https://my-json-server.typicode.com/it-crafts/mockapi/detail/',
-    id: 1
+    id: 1,
+    parent: document.querySelector("#react-root")
   })
 })()
