@@ -12,7 +12,7 @@ const Detail = function(param = {}) {
     new Slider({ 
       selector: '#slider', 
       // FIXME 컴포넌트에 로우데이터가 내려가고 있습니다 - 필요한 데이터만 정제하여, 결합도를 낮춰주세요
-      data : data,
+      data : data.imgList,
       imgPath: param.imgPath
     })
     renderDetailContent(data.detailList)    
@@ -55,6 +55,7 @@ const Detail = function(param = {}) {
 
   // XXX 쓰로틀링이 제대로 들어간것인지 이렇게 구현하는방법이 옳은지 알려주세요!
   // TODO 테스트결과 정상적으로 수행되고 있습니다 - 쓰로틀링과 별개로 img.onload도 추가해서 고도화 해보세요
+  // XXX img.onload로 어떠한걸 해야하는건지 TODO 내용 의미를 모르겠습니다.
   const onScroll = () => {
     if(!flag) {
       flag = true

@@ -6,22 +6,23 @@ const Slider = function(param = {}) {
   const ul = slider.querySelector('.YlNGR')
   const pager = slider. querySelector('#slidePager') 
   const msg = {  NO_SLIDE_DATA : '슬라이드 정보를 가져올 수 없습니다.' }
+  console.log(param.data)
   const data = param.data
   let width = container.offsetWidth
-  let total = data.imgList.length 
+  let total = data.length 
   let index = 1
   let flag = false
 
   const create = async () => {
     console.log('[Slider] create()')
-    renderSlideImg(data.imgList)
+    renderSlideImg(data)
     // TODO 아래 호출라인 제거 (불필요) 및 메소드명 변경
-    initSlideSize()
-    initPager()
     addEvents()
   }
 
   const initSlideSize = (resizeWidth = width) => {
+    container.style.transform = `translateX(${width * (-index+1)}px)`
+
     ul.querySelectorAll('li')
       .forEach(li => {
         li.style.width = resizeWidth + 'px'
@@ -94,10 +95,8 @@ const Slider = function(param = {}) {
 
       setTimeout(() => {
         width = container.offsetWidth
-        console.log('resize: ', width)
         initSlideSize(width)
         // TODO 아래라인 initSlideSize 메소드 내부로 이동
-        container.style.transform = `translateX(${width * (-index+1)}px)`
         flag = false
       }, 150)
     }
