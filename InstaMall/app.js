@@ -30,7 +30,7 @@ const page = (() => {
             _page = new Feed(_selector, 'https://my-json-server.typicode.com/it-crafts/mockapi/feed/')
          }
     }
-
+    
     create()
 
     return {
