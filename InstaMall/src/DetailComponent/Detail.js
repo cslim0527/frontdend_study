@@ -1,5 +1,7 @@
 import Slider from './Slider.js'
 
+
+// TODO 페이지네이션 하드코딩 걷어내기
 const Detail = function(param = {}) {
   const detail = param.parent.querySelector(param.selector)
   const msg = {  NO_DETAIL_DATA : '상세정보가 없습니다.' }

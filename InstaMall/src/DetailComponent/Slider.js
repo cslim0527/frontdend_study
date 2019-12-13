@@ -14,13 +14,14 @@ const Slider = function(param = {}) {
   }
   let width = container.offsetWidth
   let index = 1
-  let flag = false
+  let isResizing = false
 
   const create = async () => {
-    data.imgList = param.data.imgList;
-
     console.log('[Slider] create()')
+
+    data.imgList = param.data.imgList;
     renderSlideImg(data.imgList)
+    initPager(data.imgList)
     addEvents()
   }
 
@@ -60,12 +61,6 @@ const Slider = function(param = {}) {
             </li>`
   }
 
-  const addEvents = () => {
-    prevBtn.addEventListener('click', onClickPrevBtn)
-    nextBtn.addEventListener('click', onClickRightBtn)
-    window.addEventListener('resize', onResize)
-  }
-
   const onClickPrevBtn = () => {
     if(index <= 1) return
     pager.children[index - 1].classList.remove('XCodT');
@@ -80,12 +75,28 @@ const Slider = function(param = {}) {
     index++
     container.style.transform = `translateX(${width * (-index+1)}px)`
     pager.children[index - 1].classList.add('XCodT');
-    console.log(width)
   }
 
-  // FIXME 하드코딩된 div.Yi5aA 걷어내고 -> 템플릿화하여 length 만큼 그려지도록 고도화
-  const initPager = () => {
+  const initPager = (data = []) => {
+    pager.innerHTML = data.length ? getPagerHtml(data) : '슬라이드 정보 없음'
     pager.querySelectorAll('.Yi5aA')[0].classList.add('XCodT');
+    
+  }
+
+  const getPagerHtml = (imgList = []) => {
+    return imgList.reduce((html)=> {
+      return html += createPager()
+    },'')
+  }
+
+  const createPager = () => {
+    return `<div class="Yi5aA "></div>`
+  }
+  
+  const addEvents = () => {
+    prevBtn.addEventListener('click', onClickPrevBtn)
+    nextBtn.addEventListener('click', onClickRightBtn)
+    window.addEventListener('resize', onResize)
   }
 
   const removeEvents = () => {
@@ -95,14 +106,13 @@ const Slider = function(param = {}) {
   }
 
   const onResize = () => {
-    if(!flag) {
-      flag = true
+    if(!isResizing) {
+      isResizing = true
 
       setTimeout(() => {
         width = container.offsetWidth
         initSlideSize(width)
-        // TODO 아래라인 initSlideSize 메소드 내부로 이동
-        flag = false
+        isResizing = false
       }, 150)
     }
     
