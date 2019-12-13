@@ -25,13 +25,11 @@ class Timeline extends Component {
 
   getTimelineData = async (url, page) => {
     const { data: { data }} = await axios.get(`${url + page}`)
-    console.log(data)
     return data
   }
 
   getTimelineInfo = async (url) => {
     const { data } = await axios.get(`${url + 'info'}`)
-    console.log(data)
     return data
   }
 
