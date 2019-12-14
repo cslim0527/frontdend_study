@@ -1,3 +1,4 @@
+// TODO  commit
 const imgPath = 'https://raw.githubusercontent.com/it-crafts/mockapi/master/'
 
 const EventComponent = (function () {
