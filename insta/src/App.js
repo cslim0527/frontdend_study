@@ -1,10 +1,8 @@
-// TODO  commit
-
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import Main from './components/Main'
 import Product from './components/Product'
-import Cart from './components/Cart'
+import Cart from './components/cart/Cart'
 
 import './App.css'
 

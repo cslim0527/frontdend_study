@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import * as actions from '../../actions'
+import Counter from './Counter'
+
 
 class CartItem extends Component {
 
-  handleClickPlus = () => {
-    const { onChange } = this.props
-    onChange(this.props.itemInfo)
-  }
-
-  handleClickMinus = () => {
-    const { onChange } = this.props
-    onChange('-')
-  }
-
   render() {
 
-    const { name, price, quantity, src } = this.props.itemInfo
+    const { name, price, quantity, src, id } = this.props.itemInfo
 
     return (
-      <div id="cart">
+      <div className="cart_item">
         <ul className=" jjbaz _6xe7A">
           <li className="wo9IH">
             <div className="uu6c_">
@@ -39,10 +33,9 @@ class CartItem extends Component {
                   </div>
                 </div>
               </div>
-              <div className="Pkbci">
-                <button onClick={this.handleClickPlus} className="sqdOP L3NKy y3zKF " type="button" style={{ marginBottom: "2px" }}>+</button>
-                <button onClick={this.handleClickMinus} className="sqdOP L3NKy y3zKF " type="button" style={{ marginTop: "2px" }}>-</button>
-              </div>
+
+              <Counter onPlus={this.props.handleClickPlus} onMinus={this.props.handleClickMinus} id={id} />
+
             </div>
           </li>
         </ul>
@@ -51,4 +44,17 @@ class CartItem extends Component {
   }
 }
 
-export default CartItem;
+const mapStateToProps = (state) => {
+  return {
+    state: state.counter
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleClickPlus: (index) => dispatch(actions.increment(index)),
+    handleClickMinus: (index) => dispatch(actions.decrement(index))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem);

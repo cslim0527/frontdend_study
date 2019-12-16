@@ -1,4 +1,3 @@
-// TODO  commit
 const imgPath = 'https://raw.githubusercontent.com/it-crafts/mockapi/master/'
 
 const EventComponent = (function () {
@@ -6,9 +5,28 @@ const EventComponent = (function () {
     this.url = param.url
     this.loading = document.querySelector('._4emnV')
     this.moreBtn = document.querySelector('#btnMore')
+    this.scrollBtn = document.querySelector('#btnScroll')
     this.page = 1
     this.totalPage = 1
     this.getInfo()
+    this.handleScroll = async () => {
+      console.log('scroll')
+      const docHeight = document.documentElement.scrollHeight
+      const winHeight = document.documentElement.clientHeight
+      const scrollTop = window.pageYOffset
+      if (this.totalPage <= this.page) {
+        window.removeEventListener('scroll', this.handleScroll)
+        return
+      }
+
+      if (this.loading.style.display === '') return
+      if (scrollTop + winHeight > docHeight - 200) {
+        this.loading.style.display = ''
+        this.page++
+        await this.ajaxMoreData()
+        this.loading.style.display = 'none'
+      }
+    }
   }
 
   Event.prototype.getData = async function () {
@@ -54,9 +72,17 @@ const EventComponent = (function () {
     }
   }
 
+  Event.prototype.scrollMore = async function () {
+    this.page++
+
+    await this.ajaxMoreData()
+
+    window.addEventListener('scroll', this.handleScroll)
+  }
+
+
   return Event
 })()
-
 
 const Auto = (function () {
   const Masonry = function (param) {
@@ -66,7 +92,7 @@ const Auto = (function () {
     this.url = param.url
     this.data = []
 
-    this.init = async () => {
+    this.create = async () => {
       this.data = await this.getData()
       this.renderMasonryData(this.data)
       this.renderRepositionLayout()
@@ -74,18 +100,26 @@ const Auto = (function () {
       this.loading.style.display = 'none'
     }
 
-  
     this.addEvent = () => {
-      this.moreBtn.addEventListener('click', this.handleClickMore)
+      this.moreBtn.addEventListener('click', this.handleClickMoreBtn)
+      this.scrollBtn.addEventListener('click', this.handleClickScrollBtn)
       window.addEventListener('resize', this.handleResize)
     }
 
     this.removeEvent = () => {
-      this.moreBtn.removeEventListener('click', this.handleClickMore)
+      this.moreBtn.removeEventListener('click', this.handleClickMoreBtn)
+      window.removeEventListener('resize', this.handleResize)
     }
 
-    this.handleClickMore = () => {
+    this.handleClickMoreBtn = () => {
       this.clickMore()
+    }
+
+    this.handleClickScrollBtn = () => {
+      console.log('click')
+      this.moreBtn.removeEventListener('click', this.handleClickMoreBtn)
+      this.moreBtn.parentNode.style.display = 'none'
+      this.scrollMore()
     }
 
     this.ajaxMoreData = async () => {
@@ -157,23 +191,19 @@ const Auto = (function () {
       this.el.style['padding-bottom'] = topLarge + 'px';
     }
 
-    this.ajaxMasonryData = async () => {
-
-      this.data = await this.getData()
-
-      return this.data
-    }
-
-    this.init()
+    this.create()
   }
 
   Masonry.prototype = Object.create(EventComponent.prototype)
   Masonry.prototype.contructor = Masonry
 
-  new Masonry({
+  const app = new Masonry({
     id: 'masonry',
     url: 'https://my-json-server.typicode.com/it-crafts/mockapi/feed/'
   })
 
   return Masonry
+
 })()
+
+

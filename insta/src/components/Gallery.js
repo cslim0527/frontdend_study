@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Tab from './Tab'
-import Timeline from './Timeline'
+import Timeline from './timeline/Timeline'
 import Feed from './Feed'
 
 class Gallery extends Component {

@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 
 class CartTotal extends Component {
   render() {
+
+    const { cartItems } = this.props
+
+    let totalQuantity = 0, totalPrice = 0
+    cartItems.forEach(item => {
+      totalQuantity += item.quantity 
+      totalPrice += item.total 
+    })
+
     return (
       <>
         <div className=" DPiy6 Igw0E IwRSH eGOV_ _4EzTm HVWg4 ">
@@ -11,11 +20,11 @@ class CartTotal extends Component {
             <div className=" Igw0E IwRSH YBx95 vwCYk ">
               <div className=" Igw0E IwRSH eGOV_ _4EzTm " id="f3d9261c43ccaf4">
                 <div className="_7UhW9 xLCgt MMzan KV-D4 uL8Hv ">
-                  <div className="_7UhW9 xLCgt qyrsm KV-D4 uL8Hv ">전체상품 10개 </div>
+                  <div className="_7UhW9 xLCgt qyrsm KV-D4 uL8Hv ">전체상품 {totalQuantity}개</div>
                 </div>
               </div>
               <div className=" Igw0E IwRSH eGOV_ _4EzTm DhRcB " id="f143a2cc28ff4ec">
-                <div className="_7UhW9 xLCgt MMzan _0PwGv uL8Hv ">합계금액 90000원</div>
+                 <div className="_7UhW9 xLCgt MMzan _0PwGv uL8Hv ">합계금액 {totalPrice}원</div>
               </div>
             </div>
             <div className=" Igw0E rBNOH YBx95 ybXk5 _4EzTm soMvl "> <button className="sqdOP L3NKy y3zKF "
