@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 class CartTotal extends Component {
   render() {
@@ -7,12 +7,12 @@ class CartTotal extends Component {
 
     let totalQuantity = 0, totalPrice = 0
     cartItems.forEach(item => {
-      totalQuantity += item.quantity 
-      totalPrice += item.total 
+      totalQuantity += item.quantity
+      totalPrice += item.total
     })
 
     return (
-      <>
+      <Fragment>
         <div className=" DPiy6 Igw0E IwRSH eGOV_ _4EzTm HVWg4 ">
           <div aria-labelledby="f3d9261c43ccaf4 f143a2cc28ff4ec"
             className=" Igw0E rBNOH eGOV_ ybXk5 _4EzTm XfCBB HVWg4 ">
@@ -24,7 +24,7 @@ class CartTotal extends Component {
                 </div>
               </div>
               <div className=" Igw0E IwRSH eGOV_ _4EzTm DhRcB " id="f143a2cc28ff4ec">
-                 <div className="_7UhW9 xLCgt MMzan _0PwGv uL8Hv ">합계금액 {totalPrice}원</div>
+                <div className="_7UhW9 xLCgt MMzan _0PwGv uL8Hv ">합계금액 {totalPrice}원</div>
               </div>
             </div>
             <div className=" Igw0E rBNOH YBx95 ybXk5 _4EzTm soMvl "> <button className="sqdOP L3NKy y3zKF "
@@ -34,7 +34,7 @@ class CartTotal extends Component {
             <hr className="W4P49" />
           </div>
         </div>
-      </>
+      </Fragment>
     );
   }
 }

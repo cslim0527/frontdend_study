@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import CartTotal from './CartTotal'
-import CartItem from './CartItem'
-
+import React, { Component } from 'react'
+import { observer, inject } from 'mobx-react'
 import './cart.css'
 
+import CartHeader from './CartHeader'
+import CartTotal from './CartTotal'
+import CartLists from './CartLists'
+
+
+@inject('counter')
+@observer
 class Cart extends Component {
 
-  state = {
-    cartItems: this.props.state
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    // return this.props.counter.countList.quantity !== nextProps.counter.countList.quantity
   }
 
   render() {
-    const { cartItems } = this.state
-    const cartLists = cartItems.map((itemInfo, i) => {
-      return <CartItem itemInfo={itemInfo} key={i} /> 
-    })
-
+    const { counter: {countList} } = this.props
     return (
       <section className="_9eogI E3X2T">
         <main className="SCxLW uzKWK" role="main">
-          <div className="uKzpc">장바구니</div>
-          <CartTotal cartItems={cartItems} />
-          {cartLists}
+          <CartHeader />
+          <CartTotal cartItems={countList} />
+          <CartLists cartLists={countList} />
         </main>
       </section>
     )
@@ -30,17 +30,5 @@ class Cart extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log(state)
-  return {
-    state: state.counter
-  }
-}
 
-const mapDispatchProps = dispatch => {
-  return {
-
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchProps)(Cart);
+export default Cart

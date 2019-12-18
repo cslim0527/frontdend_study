@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import * as actions from '../../actions'
+import React, { Component } from 'react'
 import Counter from './Counter'
 
 
@@ -34,7 +32,7 @@ class CartItem extends Component {
                 </div>
               </div>
 
-              <Counter onPlus={this.props.handleClickPlus} onMinus={this.props.handleClickMinus} id={id} />
+              <Counter id={id}/>
 
             </div>
           </li>
@@ -44,17 +42,5 @@ class CartItem extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    state: state.counter
-  }
-}
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleClickPlus: (index) => dispatch(actions.increment(index)),
-    handleClickMinus: (index) => dispatch(actions.decrement(index))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartItem);
+export default CartItem
